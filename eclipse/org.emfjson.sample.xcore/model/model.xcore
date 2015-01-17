@@ -1,0 +1,16 @@
+@GenModel(
+	complianceLevel="7.0", 
+	language="", 
+	editDirectory="/org.emfjson.sample.xcore.edit/src-gen", 
+	editorDirectory="/org.emfjson.sample.xcore.editor/src-gen", 
+	resource="None")
+package org.emfjson.sample.model
+
+class Library {
+	String name
+	contains Book[*] books
+}
+
+class Book {
+	String title
+}

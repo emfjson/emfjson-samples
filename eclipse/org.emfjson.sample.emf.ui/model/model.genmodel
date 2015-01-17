@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.emfjson.sample.emf.ui/src" modelPluginID="org.emfjson.sample.emf.ui"
+    modelName="Model" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>model.ecore</foreignModel>
+  <genPackages prefix="Model" resource="Basic" disposableProviderFactory="true" ecorePackage="model.ecore#/">
+    <genClasses ecoreClass="model.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Library/books"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Book">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Book/title"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
