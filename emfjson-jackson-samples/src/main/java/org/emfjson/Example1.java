@@ -15,28 +15,27 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emfjson.EMFJs;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 
 /**
- * Example shows how to configure a ResourceSet to read and write JSON files using 
- * the EMF Resource API.
- * 
+ * This example demonstrates the use of EMFJson with the EMF Resource API. 
+ * It shows how to configure a ResourceSet to read and write JSON files.
  */
 public class Example1 {
 
 	public static void main(String[] args) throws IOException {
 		// setting up the resourceSet with resourceFactory for JSON
 		//
-		ResourceSet rs = new ResourceSetImpl();
-		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new JsonResourceFactory());
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new JsonResourceFactory());
 
 		// register ecore package for standalone (outside eclipse) execution
 		//
-		rs.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 
-		// optional options
-		//
+		// options
+		// We indicate that we want to indent the output to 
+		// be more readable.
 		Map<String, Object> options = new HashMap<>();
 		options.put(EMFJs.OPTION_INDENT_OUTPUT, true);
 
@@ -59,7 +58,7 @@ public class Example1 {
 
 		// register the model package
 		//
-		rs.getPackageRegistry().put(fooPackage.getNsURI(), fooPackage);
+		resourceSet.getPackageRegistry().put(fooPackage.getNsURI(), fooPackage);
 		
 		// create instances
 		//
@@ -68,7 +67,7 @@ public class Example1 {
 
 		// add package and instance in a resource
 		//
-		Resource res = rs.createResource(URI.createURI("model.json"));
+		Resource res = resourceSet.createResource(URI.createURI("model.json"));
 		res.getContents().add(fooPackage);
 		res.getContents().add(fooInstance);
 

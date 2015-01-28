@@ -27,13 +27,12 @@ import org.emfjson.sample.model.ModelPackage;
  * An implementation of the model object '<em><b>Library</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.emfjson.sample.model.impl.LibraryImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.emfjson.sample.model.impl.LibraryImpl#getBooks <em>Books</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

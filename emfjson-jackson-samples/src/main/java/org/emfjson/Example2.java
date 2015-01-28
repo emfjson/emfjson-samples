@@ -4,22 +4,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Address;
-import model.ModelFactory;
-import model.ModelPackage;
-import model.User;
-
 import org.eclipse.emf.ecore.EObject;
-import org.emfjson.EMFJs;
 import org.emfjson.jackson.module.EMFModule;
+import org.emfjson.model.Address;
+import org.emfjson.model.ModelFactory;
+import org.emfjson.model.ModelPackage;
+import org.emfjson.model.User;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Example shows how to use the {@link JacksonObjectMapper} to read and write 
- * from Jackson's ObjectNode and ArrayNode in/to EMF Resources.
+ * This example demonstrates the integration of EMFJson with the Jackson API.
  */
 public class Example2 {
 

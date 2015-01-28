@@ -13,6 +13,9 @@ Export-Package: model,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.emfjson.emfjson-core;bundle-version="0.10.0",
- org.emfjson.emfjson-jackson;bundle-version="0.10.0"
+ org.emfjson.jackson;bundle-version="0.10.0",
+ org.emfjson.core;bundle-version="0.10.0",
+ com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.3.0",
+ com.fasterxml.jackson.core.jackson-core;bundle-version="2.3.1",
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.3.1"
 Bundle-ActivationPolicy: lazy
