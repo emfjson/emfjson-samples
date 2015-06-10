@@ -40,6 +40,15 @@ public interface ModelFactory extends EFactory {
 	Book createBook();
 
 	/**
+	 * Returns a new object of class '<em>Author</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Author</em>'.
+	 * @generated
+	 */
+	Author createAuthor();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

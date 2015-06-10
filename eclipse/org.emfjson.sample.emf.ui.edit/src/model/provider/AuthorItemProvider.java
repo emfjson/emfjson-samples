@@ -6,7 +6,7 @@ package model.provider;
 import java.util.Collection;
 import java.util.List;
 
-import model.Book;
+import model.Author;
 import model.ModelPackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -26,12 +26,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link model.Book} object.
+ * This is the item provider adapter for a {@link model.Author} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BookItemProvider 
+public class AuthorItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -45,7 +45,7 @@ public class BookItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BookItemProvider(AdapterFactory adapterFactory) {
+	public AuthorItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,26 +60,26 @@ public class BookItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTitlePropertyDescriptor(object);
-			addAuthorsPropertyDescriptor(object);
+			addFirstNamePropertyDescriptor(object);
+			addLastNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Title feature.
+	 * This adds a property descriptor for the First Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTitlePropertyDescriptor(Object object) {
+	protected void addFirstNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Book_title_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Book_title_feature", "_UI_Book_type"),
-				 ModelPackage.Literals.BOOK__TITLE,
+				 getString("_UI_Author_firstName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Author_firstName_feature", "_UI_Author_type"),
+				 ModelPackage.Literals.AUTHOR__FIRST_NAME,
 				 true,
 				 false,
 				 false,
@@ -89,36 +89,36 @@ public class BookItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Authors feature.
+	 * This adds a property descriptor for the Last Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAuthorsPropertyDescriptor(Object object) {
+	protected void addLastNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Book_authors_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Book_authors_feature", "_UI_Book_type"),
-				 ModelPackage.Literals.BOOK__AUTHORS,
+				 getString("_UI_Author_lastName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Author_lastName_feature", "_UI_Author_type"),
+				 ModelPackage.Literals.AUTHOR__LAST_NAME,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns Book.gif.
+	 * This returns Author.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Book"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Author"));
 	}
 
 	/**
@@ -129,10 +129,10 @@ public class BookItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Book)object).getTitle();
+		String label = ((Author)object).getFirstName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Book_type") :
-			getString("_UI_Book_type") + " " + label;
+			getString("_UI_Author_type") :
+			getString("_UI_Author_type") + " " + label;
 	}
 	
 
@@ -147,8 +147,9 @@ public class BookItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Book.class)) {
-			case ModelPackage.BOOK__TITLE:
+		switch (notification.getFeatureID(Author.class)) {
+			case ModelPackage.AUTHOR__FIRST_NAME:
+			case ModelPackage.AUTHOR__LAST_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

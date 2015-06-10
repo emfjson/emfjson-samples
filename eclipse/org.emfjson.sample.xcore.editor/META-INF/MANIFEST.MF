@@ -15,9 +15,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- org.emfjson.core;bundle-version="0.10.0",
- org.emfjson.jackson;bundle-version="0.10.0",
- com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.3.0",
- com.fasterxml.jackson.core.jackson-core;bundle-version="2.3.1",
- com.fasterxml.jackson.core.jackson-databind;bundle-version="2.3.1"
+ org.emfjson.core,
+ org.emfjson.jackson,
+ com.fasterxml.jackson.core.jackson-annotations,
+ com.fasterxml.jackson.core.jackson-core,
+ com.fasterxml.jackson.core.jackson-databind
 Bundle-ActivationPolicy: lazy

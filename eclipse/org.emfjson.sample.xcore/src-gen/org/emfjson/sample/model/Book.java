@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.emfjson.sample.model.Book#getTitle <em>Title</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.emfjson.sample.model.ModelPackage#getBook()
  * @model

@@ -118,6 +118,29 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link model.Author} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AuthorItemProvider authorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link model.Author}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAuthorAdapter() {
+		if (authorItemProvider == null) {
+			authorItemProvider = new AuthorItemProvider(this);
+		}
+
+		return authorItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -218,6 +241,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	public void dispose() {
 		if (libraryItemProvider != null) libraryItemProvider.dispose();
 		if (bookItemProvider != null) bookItemProvider.dispose();
+		if (authorItemProvider != null) authorItemProvider.dispose();
 	}
 
 }

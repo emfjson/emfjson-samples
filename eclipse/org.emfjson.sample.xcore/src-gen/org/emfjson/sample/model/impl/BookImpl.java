@@ -18,10 +18,10 @@ import org.emfjson.sample.model.ModelPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.emfjson.sample.model.impl.BookImpl#getTitle <em>Title</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
