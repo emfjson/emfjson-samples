@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emfjson.jackson.JacksonOptions;
 import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResource;
 import org.emfjson.jackson.resource.JsonResourceFactory;
@@ -21,20 +22,22 @@ public class Example3 {
 
 	public static void main(String[] args) throws JsonProcessingException {
 		final ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new EMFModule());
-
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new JsonResourceFactory() {
 			@Override
 			public Resource createResource(URI uri) {
-				JsonResource resource = new JsonResource(uri) {
+				return new JsonResource(uri) {
 					protected boolean useUUIDs() {
 						return true;
-					};
+					}
 				};
-				return resource;
 			}
 		});
+
+		mapper.registerModule(new EMFModule(resourceSet,
+				new JacksonOptions.Builder()
+						.withID(true)
+						.build()));
 
 		User u1 = ModelFactory.eINSTANCE.createUser();
 		User u2 = ModelFactory.eINSTANCE.createUser();
