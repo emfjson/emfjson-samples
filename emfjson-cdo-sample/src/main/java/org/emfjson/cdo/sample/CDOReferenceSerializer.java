@@ -13,16 +13,16 @@ import java.io.IOException;
 
 public class CDOReferenceSerializer implements ReferenceSerializer {
 
-    @Override
-    public void serialize(EObject source, EObject value, JsonGenerator jg, JacksonOptions options) throws IOException {
-        final CDOObject cdoObject = CDOUtil.getCDOObject(value);
-        final CDOID cdoid = CDOIDUtil.getCDOID(cdoObject);
+	@Override
+	public void serialize(EObject source, EObject value, JsonGenerator jg, JacksonOptions options) throws IOException {
+		final CDOObject cdoObject = CDOUtil.getCDOObject(value);
+		final CDOID cdoid = CDOIDUtil.getCDOID(cdoObject);
 
-        if (cdoid != null) {
-            jg.writeNumber(CDOIDUtil.getLong(cdoid));
-        } else {
-            jg.writeNull();
-        }
-    }
+		if (cdoid != null) {
+			jg.writeNumber(CDOIDUtil.getLong(cdoid));
+		} else {
+			jg.writeNull();
+		}
+	}
 
 }

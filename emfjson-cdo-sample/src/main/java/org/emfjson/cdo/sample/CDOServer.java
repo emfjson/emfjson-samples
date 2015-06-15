@@ -28,100 +28,95 @@ import static org.eclipse.emf.cdo.server.CDOServerUtil.createRepository;
 
 public class CDOServer {
 
-    private final IManagedContainer container;
-    private final IRepository repository;
-    private final DataSource dataSource;
-    private final String name;
-    private IJVMConnector connector;
+	private final IManagedContainer container;
+	private final IRepository repository;
+	private final DataSource dataSource;
+	private final String name;
+	private IJVMConnector connector;
 
-    public CDOServer(String name) {
-        this.name = name;
-        this.container = getContainer();
-        this.dataSource = createDataSource();
-        this.repository = createRepository(getName(), createStore(), createProperties());
-    }
+	public CDOServer(String name) {
+		this.name = name;
+		this.container = getContainer();
+		this.dataSource = createDataSource();
+		this.repository = createRepository(getName(), createStore(), createProperties());
+	}
 
-    public void start() {
-        container.activate();
+	public void start() {
+		container.activate();
 
-        CDOServerUtil.addRepository(container, repository);
-        JVMUtil.getAcceptor(container, getName());
+		CDOServerUtil.addRepository(container, repository);
+		JVMUtil.getAcceptor(container, getName());
 
-        connector = JVMUtil.getConnector(container, getName());
-    }
+		connector = JVMUtil.getConnector(container, getName());
+	}
 
-    public void stop() {
-        if (container != null && container.isActive()) {
-            container.deactivate();
-        }
-        if (connector != null && connector.isConnected()) {
-            connector.close();
-            connector = null;
-        }
-    }
+	public void stop() {
+		container.deactivate();
+		connector.close();
+	}
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
+	public DataSource getDataSource() {
+		return dataSource;
+	}
 
-    public DataSource createDataSource() {
-        final JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setURL("jdbc:h2:~/database/" + getName());
+	public DataSource createDataSource() {
+		final JdbcDataSource dataSource = new JdbcDataSource();
+		dataSource.setURL("jdbc:h2:mem:" + getName() + ";DB_CLOSE_DELAY=-1");
 
-        return dataSource;
-    }
+		return dataSource;
+	}
 
-    public IDBAdapter getAdapter() {
-        return new H2Adapter();
-    }
+	public IDBAdapter getAdapter() {
+		return new H2Adapter();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public IConnector getConnector() {
-        if (connector == null && container.isActive()) {
-            connector = JVMUtil.getConnector(container, getName());
-        }
-        return connector;
-    }
+	public IConnector getConnector() {
+		if (connector == null && container.isActive()) {
+			connector = JVMUtil.getConnector(container, getName());
+		}
+		return connector;
+	}
 
-    protected IStore createStore() {
-        final IDBAdapter dbAdapter = getAdapter();
+	protected IStore createStore() {
+		final IDBAdapter dbAdapter = getAdapter();
 
-        final IMappingStrategy mappingStrategy = CDODBUtil.createHorizontalMappingStrategy(true, true);
-        final IDBConnectionProvider dbConnectionProvider = dbAdapter.createConnectionProvider(getDataSource());
+		final IMappingStrategy mappingStrategy = CDODBUtil.createHorizontalMappingStrategy(true, true);
+		final IDBConnectionProvider dbConnectionProvider = dbAdapter.createConnectionProvider(getDataSource());
 
-        return CDODBUtil.createStore(mappingStrategy, dbAdapter, dbConnectionProvider);
-    }
+		return CDODBUtil.createStore(mappingStrategy, dbAdapter, dbConnectionProvider);
+	}
 
-    protected Map<String, String> createProperties() {
-        final Map<String, String> props = new HashMap<>();
-        props.put(IRepository.Props.OVERRIDE_UUID, getName());
-        props.put(IRepository.Props.SUPPORTING_AUDITS, "true");
-        props.put(IRepository.Props.SUPPORTING_BRANCHES, "true");
-        props.put(IRepository.Props.ID_GENERATION_LOCATION, "STORE");
-        props.put(IRepository.Props.ENSURE_REFERENTIAL_INTEGRITY, "true");
+	protected Map<String, String> createProperties() {
+		final Map<String, String> props = new HashMap<>();
+		props.put(IRepository.Props.OVERRIDE_UUID, getName());
+		props.put(IRepository.Props.SUPPORTING_AUDITS, "true");
+		props.put(IRepository.Props.SUPPORTING_BRANCHES, "true");
+		props.put(IRepository.Props.ID_GENERATION_LOCATION, "STORE");
+		props.put(IRepository.Props.ENSURE_REFERENTIAL_INTEGRITY, "true");
 
-        return props;
-    }
+		return props;
+	}
 
-    protected IManagedContainer getContainer() {
-        final IManagedContainer container = ContainerUtil.createContainer();
-        Net4jUtil.prepareContainer(container);
-        JVMUtil.prepareContainer(container);
-        CDONet4jUtil.prepareContainer(container);
-        CDONet4jServerUtil.prepareContainer(container);
+	protected IManagedContainer getContainer() {
+		final IManagedContainer container = ContainerUtil.createContainer();
+		Net4jUtil.prepareContainer(container);
+		JVMUtil.prepareContainer(container);
+		CDONet4jUtil.prepareContainer(container);
+		CDONet4jServerUtil.prepareContainer(container);
 
-        return container;
-    }
+		return container;
+	}
 
-    public CDOSessionConfiguration getSessionConfiguration() {
-        CDONet4jSessionConfiguration configuration = CDONet4jUtil.createNet4jSessionConfiguration();
-        configuration.setConnector(getConnector());
-        configuration.setRepositoryName(getName());
+	public CDOSessionConfiguration getSessionConfiguration() {
+		CDONet4jSessionConfiguration configuration = CDONet4jUtil.createNet4jSessionConfiguration();
+		configuration.setConnector(getConnector());
+		configuration.setRepositoryName(getName());
 
-        return configuration;
-    }
+		return configuration;
+	}
 
 }

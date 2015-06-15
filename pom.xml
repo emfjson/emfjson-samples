@@ -18,7 +18,9 @@
         <module>emfjson-jackson-samples</module>
         <module>emfjson-gwt-sample</module>
         <module>emfjson-cdo-sample</module>
-    </modules>
+		<module>emfjson-couchdb-sample</module>
+		<module>emfjson-mongo-sample</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>
