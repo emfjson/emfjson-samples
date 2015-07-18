@@ -3,6 +3,7 @@ package org.emfjson.cdo.sample;
 import com.fasterxml.jackson.core.JsonLocation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import org.eclipse.emf.cdo.common.id.CDOID;
 import org.eclipse.emf.cdo.common.id.CDOIDUtil;
 import org.eclipse.emf.cdo.transaction.CDOTransaction;
@@ -14,7 +15,6 @@ import org.emfjson.common.EObjects;
 import org.emfjson.common.ReferenceEntries;
 import org.emfjson.common.ReferenceEntries.ReferenceEntry;
 import org.emfjson.handlers.URIHandler;
-import org.emfjson.jackson.JacksonOptions;
 import org.emfjson.jackson.databind.deser.references.ReferenceDeserializer;
 import org.emfjson.jackson.errors.JSONException;
 
@@ -29,7 +29,7 @@ public class CDOReferenceDeserializer implements ReferenceDeserializer {
 	}
 
 	@Override
-	public ReferenceEntry deserialize(JsonParser jp, final EObject owner, final EReference reference, JacksonOptions options) throws IOException {
+	public ReferenceEntry deserialize(JsonParser jp, final EObject owner, final EReference reference, DeserializationContext ctxt) throws IOException {
 		if (JsonToken.VALUE_NUMBER_INT.equals(jp.getCurrentToken())) {
 			final JsonLocation location = jp.getCurrentLocation();
 			final long value = jp.getLongValue();
