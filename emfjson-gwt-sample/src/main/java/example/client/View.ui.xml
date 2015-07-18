@@ -16,7 +16,7 @@
 		<header>
 			<g:Button ui:field="createButton">Create Resource</g:Button>
 		</header>
-		<g:HTMLPanel ui:field="content"></g:HTMLPanel>
+		<g:HTMLPanel ui:field="content"/>
 	</g:HTMLPanel>
 
 </ui:UiBinder>

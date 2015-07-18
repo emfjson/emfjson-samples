@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -13,6 +14,7 @@ import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emfjson.jackson.module.EMFModule;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,9 +23,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Consumes("application/json")
 public class JsonResourceBodyReader implements MessageBodyReader<Resource> {
 
+	@Inject
+	ResourceSet resourceSet;
+
 	@Override
-	public boolean isReadable(Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType) {
+	public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		return type == Resource.class || Resource.class.isAssignableFrom(type);
 	}
 
@@ -34,7 +38,7 @@ public class JsonResourceBodyReader implements MessageBodyReader<Resource> {
 			throws IOException, WebApplicationException {
 
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new EMFModule());
+		mapper.registerModule(new EMFModule(resourceSet));
 
 		Resource resource;
 		try {

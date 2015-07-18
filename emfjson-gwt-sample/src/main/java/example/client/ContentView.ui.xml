@@ -9,7 +9,7 @@
 		}
 		.header {
 			border-bottom: 1px solid #EBECEC;
-			background: none repeat scroll 0% 0% #F8F9FB;
+			background: none repeat scroll 0 0 #F8F9FB;
 			min-height: 40px;
 			line-height: 40px;
 			padding-left: 10px;
@@ -29,7 +29,6 @@
 			padding: 10px;
 		}
 		.form-header {
-			height: 30px;
 			line-height: 30px;
 		}
 		.form-table {
@@ -45,7 +44,7 @@
 
 	<g:HTMLPanel styleName="{style.content}">
 		<div class="{style.header}">
-			<g:Label ui:field="resourceLabel"></g:Label>
+			<g:Label ui:field="resourceLabel" />
 			<div>
 				<g:Button ui:field="deleteButton">Delete</g:Button>
 				<g:Button ui:field="saveButton">Save</g:Button>
@@ -58,7 +57,7 @@
 			<div class="{style.form-table}">
 				<div>
 					<label>name: </label>
-					<g:TextBox ui:field="nameTextBox"></g:TextBox>
+					<g:TextBox ui:field="nameTextBox" />
 				</div>
 			</div>
 		</div>

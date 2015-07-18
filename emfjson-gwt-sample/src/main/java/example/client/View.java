@@ -21,10 +21,6 @@ public class View extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public void setContent(ContentView view) {
-		content.add(view);
-	}
-
 	public void handleCreate(ClickHandler handler) {
 		createButton.addClickHandler(handler);
 	}

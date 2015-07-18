@@ -1,26 +1,29 @@
 package example.server.providers;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.emfjson.jackson.module.EMFModule;
 
+import javax.inject.Inject;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.emfjson.jackson.module.EMFModule;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
 @Provider
 @Produces("application/json")
 public class JsonResourceBodyWriter implements MessageBodyWriter<Resource> {
+
+	@Inject
+	ResourceSet resourceSet;
 
 	@Override
 	public boolean isWriteable(Class<?> type, Type genericType, 
@@ -42,7 +45,7 @@ public class JsonResourceBodyWriter implements MessageBodyWriter<Resource> {
 			WebApplicationException {
 		
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new EMFModule());
+		mapper.registerModule(new EMFModule(resourceSet));
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 
 		mapper.writeValue(entityStream, resource);

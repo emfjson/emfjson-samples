@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,13 +23,14 @@ import example.server.store.ModelStore;
 @Path("resources")
 public class ModelResource {
 
-	private final ModelStore store = new ModelStore();
+	@Inject
+	ModelStore store;
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
 	public Response getModel(@PathParam("id") final String id) {
-		Resource resource = null;
+		Resource resource;
 		try {
 			resource = store.get(id);
 		} catch (IOException e) {
@@ -40,7 +42,7 @@ public class ModelResource {
 
 	@POST
 	public Response createEmptyModel() {
-		URI uri = null;
+		URI uri;
 		try {
 			uri = store.create();
 		} catch (IOException | URISyntaxException e) {
@@ -58,7 +60,7 @@ public class ModelResource {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 
-		URI location = null;
+		URI location;
 		try {
 			location = store.save(id, resource);
 		} catch (IOException | URISyntaxException e) {
