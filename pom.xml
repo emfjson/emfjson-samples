@@ -4,7 +4,7 @@
 
     <groupId>org.emfjson</groupId>
     <artifactId>emfjson-samples</artifactId>
-    <version>0.12.0</version>
+    <version>0.13.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -18,7 +18,10 @@
         <module>emfjson-jackson-samples</module>
         <module>emfjson-gwt-sample</module>
         <module>emfjson-cdo-sample</module>
+        <module>emfjson-couchdb-sample</module>
+        <module>emfjson-mongo-sample</module>
         <module>emfjson-jersey-sample</module>
+        <module>emfjson-spring-sample</module>
     </modules>
 
     <dependencyManagement>
@@ -26,12 +29,12 @@
             <dependency>
                 <groupId>org.emfjson</groupId>
                 <artifactId>emfjson-jackson</artifactId>
-                <version>0.12.0-SNAPSHOT</version>
+                <version>0.13.0</version>
             </dependency>
             <dependency>
                 <groupId>org.emfjson</groupId>
                 <artifactId>emfjson-gwt</artifactId>
-                <version>0.12.0-SNAPSHOT</version>
+                <version>0.13.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

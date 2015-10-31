@@ -41,35 +41,35 @@ public class Example1 {
 
 		// create a model
 		//
-		EPackage fooPackage = EcoreFactory.eINSTANCE.createEPackage();
-		fooPackage.setName("foo");
-		fooPackage.setNsPrefix("foo");
-		fooPackage.setNsURI("http://sample.org/foo");
+		EPackage samplePackage = EcoreFactory.eINSTANCE.createEPackage();
+		samplePackage.setName("sample");
+		samplePackage.setNsPrefix("sample");
+		samplePackage.setNsURI("http://sample.org/sample");
 		
-		EClass fooClass = EcoreFactory.eINSTANCE.createEClass();
-		fooClass.setName("Foo");
+		EClass userClass = EcoreFactory.eINSTANCE.createEClass();
+		userClass.setName("User");
 		
-		EAttribute labelAttr = EcoreFactory.eINSTANCE.createEAttribute();
-		labelAttr.setName("label");
-		labelAttr.setEType(EcorePackage.Literals.ESTRING);
+		EAttribute userName = EcoreFactory.eINSTANCE.createEAttribute();
+		userName.setName("name");
+		userName.setEType(EcorePackage.Literals.ESTRING);
 		
-		fooClass.getEStructuralFeatures().add(labelAttr);
-		fooPackage.getEClassifiers().add(fooClass);
+		userClass.getEStructuralFeatures().add(userName);
+		samplePackage.getEClassifiers().add(userClass);
 
 		// register the model package
 		//
-		resourceSet.getPackageRegistry().put(fooPackage.getNsURI(), fooPackage);
+		resourceSet.getPackageRegistry().put(samplePackage.getNsURI(), samplePackage);
 		
 		// create instances
 		//
-		EObject fooInstance = EcoreUtil.create(fooClass);
-		fooInstance.eSet(labelAttr, "I am a foo");
+		EObject u1 = EcoreUtil.create(userClass);
+		u1.eSet(userName, "u1");
 
 		// add package and instance in a resource
 		//
-		Resource res = resourceSet.createResource(URI.createURI("model.json"));
-		res.getContents().add(fooPackage);
-		res.getContents().add(fooInstance);
+		Resource res = resourceSet.createResource(URI.createURI("http://sample.org/sample"));
+		res.getContents().add(samplePackage);
+		res.getContents().add(u1);
 
 		// save it as JSON
 		//

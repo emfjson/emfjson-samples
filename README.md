@@ -5,12 +5,15 @@ This repository contains samples project that demonstrates the usage of [EMFJson
 
 ## Samples
 
+This table shows the examples that are available in this repository. 
+
 | project | Description |
 |---|---|
-| emfjson-jackson-samples | Demonstrates usage of EMFJson with EMF Resoure API and Jackson API |
-| emfjson-gwt-sample | Demonstrates usage of EMFJson with GWT |
-| eclipse/org.emfjson.sample.emf.ui | Demonstrates usage of EMFJson in a EMF Plugin Project |
-| eclipse/org.emfjson.sample.xcore | Demonstrates usage of EMFJson in a Xcore Plugin Project |
+| emfjson-jackson-samples | EMFJson with EMF Resource API and Jackson API |
+| emfjson-gwt-sample | EMFJson with GWT |
+| emfjson-cdo-sample | EMFJson with CDO |
+| eclipse/org.emfjson.sample.emf.ui | EMFJson in a EMF Plugin Project |
+| eclipse/org.emfjson.sample.xcore | EMFJson in a Xcore Plugin Project |
 
 ## License
 
