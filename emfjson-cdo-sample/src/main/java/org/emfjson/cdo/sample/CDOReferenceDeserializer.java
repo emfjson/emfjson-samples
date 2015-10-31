@@ -4,13 +4,13 @@ import com.fasterxml.jackson.core.JsonLocation;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import org.eclipse.emf.cdo.CDOObject;
 import org.eclipse.emf.cdo.common.id.CDOID;
 import org.eclipse.emf.cdo.common.id.CDOIDUtil;
 import org.eclipse.emf.cdo.transaction.CDOTransaction;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.internal.cdo.object.CDOLegacyAdapter;
 import org.emfjson.common.EObjects;
 import org.emfjson.common.ReferenceEntries;
 import org.emfjson.common.ReferenceEntries.ReferenceEntry;
@@ -39,16 +39,12 @@ public class CDOReferenceDeserializer implements ReferenceDeserializer {
 				public void resolve(ResourceSet resourceSet, URIHandler handler, ReferenceEntries re) {
 					CDOID cdoid = CDOIDUtil.createLong(value);
 
-					EObject object;
+					CDOObject object;
 					try {
 						object = transaction.getObject(cdoid);
 					} catch (Exception e) {
 						owner.eResource().getErrors().add(new JSONException(e, location));
 						return;
-					}
-
-					if (object instanceof CDOLegacyAdapter) {
-						object = ((CDOLegacyAdapter) object).cdoInternalInstance();
 					}
 
 					try {

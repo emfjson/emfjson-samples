@@ -1,0 +1,22 @@
+@GenModel(
+    bundleManifest="false",
+    modelDirectory="emfjson-cdo-sample/src/main/java-gen",
+    complianceLevel="7.0",
+    rootExtendsClass="org.eclipse.emf.internal.cdo.CDOObjectImpl",
+    rootExtendsInterface="org.eclipse.emf.cdo.CDOObject"
+)
+package org.emfjson.sample.model
+
+class User {
+    String name
+    Date birthDate
+    contains Address[] addresses
+    refers User[] friends
+}
+
+class Address {
+    String street
+    String country
+    String city
+    int number
+}

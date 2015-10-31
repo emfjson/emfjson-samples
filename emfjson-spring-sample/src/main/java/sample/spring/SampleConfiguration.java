@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emfjson.jackson.module.EMFModule;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import sample.spring.model.ModelPackage;
 
 @Configuration
 public class SampleConfiguration extends RepositoryRestMvcConfiguration {
@@ -15,6 +16,8 @@ public class SampleConfiguration extends RepositoryRestMvcConfiguration {
 	protected void configureJacksonObjectMapper(ObjectMapper objectMapper) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(ModelPackage.eNS_URI, ModelPackage.eINSTANCE);
+
 		objectMapper.registerModule(new EMFModule(resourceSet));
 	}
 

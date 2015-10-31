@@ -5,11 +5,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emfjson.jackson.JacksonOptions;
 import org.emfjson.jackson.module.EMFModule;
+import sample.jersey.model.ModelPackage;
+import sample.jersey.model.User;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -26,9 +27,7 @@ public class SampleService implements Service {
 
 	@Override
 	public Resource create(JsonNode value) throws JsonProcessingException {
-		final EClass root = (EClass) resourceSet.getEObject(
-				URI.createURI("http://example.org/model#//User"),
-				true);
+		final EClass root = ModelPackage.Literals.USER;
 
 		final JacksonOptions options = new JacksonOptions.Builder()
 				.withRoot(root)
@@ -56,8 +55,8 @@ public class SampleService implements Service {
 			throw new RuntimeException("Resource should not be empty");
 		}
 
-		EObject user = resource.getContents().get(0);
-		user.eSet(user.eClass().getEStructuralFeature("name"), value.get("name").asText());
+		User user = (User) resource.getContents().get(0);
+		user.setName(value.get("name").asText());
 
 		return resource;
 	}

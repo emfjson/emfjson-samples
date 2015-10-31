@@ -1,0 +1,20 @@
+@GenModel(
+    bundleManifest="false",
+    modelDirectory="emfjson-spring-sample/src/main/java-gen",
+    complianceLevel="7.0"
+)
+package sample.spring.model
+
+class User {
+    String name
+    Date birthDate
+    contains Address[] addresses
+    refers User[] friends
+}
+
+class Address {
+    String street
+    String country
+    String city
+    int number
+}

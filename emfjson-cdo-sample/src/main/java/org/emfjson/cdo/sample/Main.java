@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emfjson.jackson.JacksonOptions;
 import org.emfjson.jackson.databind.ser.ResourceSerializer;
 import org.emfjson.jackson.module.EMFModule;
-import org.emfjson.model.ModelFactory;
-import org.emfjson.model.ModelPackage;
-import org.emfjson.model.User;
+import org.emfjson.sample.model.ModelFactory;
+import org.emfjson.sample.model.ModelPackage;
+import org.emfjson.sample.model.User;
 
 public class Main {
 
@@ -88,7 +88,7 @@ public class Main {
 		long i = CDOIDUtil.getLong(CDOIDUtil.getCDOID(oo));
 
 		return mapper.createObjectNode()
-				.put("eClass", "http://www.foo.org/model#//User")
+				.put("eClass", "org.emfjson.sample.model#//User")
 				.put("name", "Frank")
 				.set("friends", mapper.createArrayNode()
 						.add(i));
